@@ -1,6 +1,6 @@
 # firebase-arduino
 
-> A Vue.js project for Arduino
+> A Vue.js project
 
 ## Build Setup
 
