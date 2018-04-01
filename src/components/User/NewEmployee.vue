@@ -1,13 +1,16 @@
 <template>
   <div>
-    <p>The Home Page</p>
+    <p>New Employee Page</p>
   </div>
 
 </template>
 
 <script>
   export default {
-    name: "Home"
+    name: "new-employee",
+    data() {
+      return {}
+    }
   }
 </script>
 
