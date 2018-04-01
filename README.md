@@ -18,4 +18,8 @@ npm run build
 npm run build --report
 ```
 
+## Arduino setup
+
+- the Arduino Project folder contains the instructions for setting up and programming the Wemos D1 mini
+
 For a detailed explanation on how things work, check out the [guide](http://vuejs-templates.github.io/webpack/) and [docs for vue-loader](http://vuejs.github.io/vue-loader).
