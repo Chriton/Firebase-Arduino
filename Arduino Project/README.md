@@ -8,16 +8,23 @@ This is an Arduino project that saves and updates data to a Firebase Realtime Da
 - Add the ArduinoJson library to Arduino IDE (Sketch -> Include library -> Manage Libraries -> search and install ArduinoJson)
 - Add the [firebase-arduino](https://github.com/firebase/firebase-arduino) demo files to Arduino IDE (download 
 the zip repository to a folder of your choice and then Sketch -> Include library -> Manage Libraries -> Add .ZIP Library)
-- Add support for the WEMOS 8266 board -> Arduino IDE -> Tools -> Board -> Board Manager -> search and install ESP8266
+- Add support for [Wemos D1 mini v.2.30](https://wiki.wemos.cc/products:retired:d1_mini_v2.3.0) -> Arduino IDE -> Tools -> Board -> 
+Board Manager -> search and install ESP8266
+- Add suport for [Wemos ws2812b RGB Shield](https://wiki.wemos.cc/products:d1_mini_shields:ws2812b_rgb_shield) from the
+ [Adafruit repository](https://github.com/adafruit/Adafruit_NeoPixel) (download the zip repository to a folder of your 
+ choice and then Sketch -> Include library -> Manage Libraries -> Add .ZIP Library)
 
 ## Arduino Hardware
 
-Using: Wemos D1 mini v.2.30 (with 4mb flash. based on ESP8266 ESP-12S)
+Using: 
+- [Wemos D1 mini v.2.30](https://wiki.wemos.cc/products:retired:d1_mini_v2.3.0) (with 4mb flash. based on ESP8266 ESP-12S)
+- [Wemos ws2812b RGB Shield](https://wiki.wemos.cc/products:d1_mini_shields:ws2812b_rgb_shield)
+
 Make sure you set these in Arduino IDE -> Tools:
 - Board: Wemos D1 R2 & mini
 - Flash Size: 4M (3M SPIFFS)
 - Upload Speed: 115200
-- Port: /dev/cu.wchusbserial1410 (Note that the right port will appear when the device is connected to USB)
+- Port: /dev/cu.wchusbserial1410 (Note that the right port will appear when the device is connected to USB. Download the driver from [here](https://wiki.wemos.cc/downloads))
 - Programmer ArduinoISP
 
 

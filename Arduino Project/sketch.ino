@@ -1,30 +1,34 @@
-//
-// Copyright 2015 Google Inc.
-//
-// Licensed under the Apache License, Version 2.0 (the "License");
-// you may not use this file except in compliance with the License.
-// You may obtain a copy of the License at
-//
-//     http://www.apache.org/licenses/LICENSE-2.0
-//
-// Unless required by applicable law or agreed to in writing, software
-// distributed under the License is distributed on an "AS IS" BASIS,
-// WITHOUT WARRANTIES OR CONDITIONS OF ANY KIND, either express or implied.
-// See the License for the specific language governing permissions and
-// limitations under the License.
-//
-// FirebaseDemo_ESP8266 is a sample that demo the different functions
-// of the FirebaseArduino API.
+// Doru Muntean march 2018
+//https://github.com/wemos/D1_mini_Examples
+
+
+#include <Adafruit_NeoPixel.h>
 #include <ESP8266WiFi.h>
 #include <FirebaseArduino.h>
-// Set these to run example.
-#define FIREBASE_HOST "your database link"
-#define FIREBASE_AUTH "your database Secret"
-#define WIFI_SSID "your ssid"
-#define WIFI_PASSWORD "your wifi password"
+
+
+//Firebase Realtime Database setup
+#define FIREBASE_HOST "fir-arduino-1.firebaseio.com"
+#define FIREBASE_AUTH "JRt6JlnyJA2PemMGOG4IT3W6Sb3B51Mh0ZKvEFIF"
+
+//WI-FI setup
+#define WIFI_SSID "Chriton 2.4Ghz"
+#define WIFI_PASSWORD "trutulescu"
+
+//WS2812B RGB shield setup
+#define PIN D2
+Adafruit_NeoPixel pixels = Adafruit_NeoPixel(1, PIN, NEO_GRB + NEO_KHZ800);
+
+//Other variables
+int n = 0;
+
 void setup() {
   Serial.begin(9600);
-  // connect to wifi.
+
+  //Initialize the NeoPixel library for the WS2812B RGB shield
+  pixels.begin();
+
+  //Connect to WI-FI.
   WiFi.begin(WIFI_SSID, WIFI_PASSWORD);
   Serial.print("connecting");
   while (WiFi.status() != WL_CONNECTED) {
@@ -37,10 +41,20 @@ void setup() {
 
   Firebase.begin(FIREBASE_HOST, FIREBASE_AUTH);
 }
-int n = 0;
+
+
 void loop() {
+
   // set value
   Firebase.setFloat("number", 42.0);
+
+  //Flash green pixel on the RGB shield
+  pixels.setPixelColor(0, pixels.Color(0,255,0));
+  pixels.show();
+  delay(50);
+  pixels.setPixelColor(0, pixels.Color(0,0,0));
+  pixels.show();
+
   // handle error
   if (Firebase.failed()) {
       Serial.print("setting /number failed:");
@@ -48,6 +62,7 @@ void loop() {
       return;
   }
   delay(1000);
+
 
   // update value
   Firebase.setFloat("number", 43.0);
@@ -58,13 +73,19 @@ void loop() {
       return;
   }
   delay(1000);
+
+
   // get value
   Serial.print("number: ");
   Serial.println(Firebase.getFloat("number"));
   delay(1000);
+
+
   // remove value
   Firebase.remove("number");
   delay(1000);
+
+
   // set string value
   Firebase.setString("message", "hello world");
   // handle error
@@ -75,6 +96,7 @@ void loop() {
   }
   delay(1000);
 
+
   // set bool value
   Firebase.setBool("truth", false);
   // handle error
@@ -84,6 +106,8 @@ void loop() {
       return;
   }
   delay(1000);
+
+
   // append a new value to /logs
   String name = Firebase.pushInt("logs", n++);
   // handle error
@@ -92,6 +116,8 @@ void loop() {
       Serial.println(Firebase.error());
       return;
   }
+
+  //Other tests
  String someTest = Firebase.pushInt("sensors/timeTest", n++);
   delay(1000);
 }
