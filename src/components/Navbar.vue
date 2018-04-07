@@ -5,7 +5,6 @@
         <v-list-tile
           v-for="item in menuItems"
           :key="item.title"
-          router
           :to="item.link">
           <v-list-tile-action>
             <v-icon left>{{ item.icon }}</v-icon>
@@ -17,15 +16,16 @@
 
     <v-toolbar dark class="purple lighten-2">
       <v-toolbar-side-icon
-        @click="sideNav = !sideNav"
-        class="hidden-sm-and-up"></v-toolbar-side-icon>
+        @click.stop="sideNav = !sideNav"
+        class="hidden-sm-and-up">
+      </v-toolbar-side-icon>
       <v-toolbar-title>
         <router-link to="/" tag="span" style="cursor: pointer">Firebse Arduino</router-link>
       </v-toolbar-title>
       <v-spacer></v-spacer>
       <v-toolbar-items class="hidden-xs-only">
 
-        <v-btn v-if="isLoggedIn" flat router v-on:click="logout">
+        <v-btn v-if="isLoggedIn" flat @click="logout">
           <v-icon left>exit_to_app</v-icon>
           Logout
         </v-btn>
@@ -33,9 +33,9 @@
         <v-btn
           flat v-for="item in menuItems"
           :key="item.title"
-          router
-          :to="item.link"
-          v-on:click.native="item.action">
+          :to="item.link">
+          <!--@click="item.action"-->
+
           <v-icon left>{{ item.icon }}</v-icon>
           {{ item.title }}
         </v-btn>

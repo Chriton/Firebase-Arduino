@@ -14,14 +14,14 @@
         label="E-mail"
         v-model="email"
         :rules="emailRules"
-        required
-      ></v-text-field>
+        required>
+      </v-text-field>
       <v-text-field
         label="Password"
         v-model="password"
         :rules="passwordRules"
-        required
-      ></v-text-field>
+        required>
+      </v-text-field>
       <!--<v-select-->
       <!--label="Item"-->
       <!--v-model="select"-->
