@@ -1,4 +1,4 @@
-# firebase-arduino
+# Firebase Arduino
 
 > A Vue.js project which reads data from Firebase Realtime Database. The data is written to Firebase by a Wemos D1 mini arduino.
 

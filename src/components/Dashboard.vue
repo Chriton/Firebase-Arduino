@@ -3,36 +3,22 @@
     <v-layout row wrap justify-center>
       <v-flex xs12 sm12 md6>
         <v-card>
-          <!--<v-toolbar>-->
-            <!--<v-toolbar-side-icon></v-toolbar-side-icon>-->
-          <!--</v-toolbar>-->
-          <v-card-text style="height: 300px;" class="grey lighten-5">
-            <div>The Dashboard Page</div>
-            <div>
-              <ul>
-                <li v-for="employee in employees"
-                v-bind:key="employee.id">
-                  {{ employee.employee_id}}
-                  {{ employee.name }}
-                  {{ employee.dept }}
-                  {{ employee.position }}
-                </li>
-              </ul>
+          <v-card-title><h4>Sensor1 Data</h4></v-card-title>
+          <v-divider></v-divider>
+          <v-list dense>
+            <div v-if="sensorData == undefined">
+              <v-list-tile>
+                <v-list-tile-content>There is no sensor data available</v-list-tile-content>
+              </v-list-tile>
             </div>
-          </v-card-text>
+            <div v-else>
+              <v-list-tile v-for="(value, propertyName, index) in sensorData" v-bind:key="sensorData.index">
+                <v-list-tile-content>{{ index + 1 }}.{{ propertyName }}</v-list-tile-content>
+                <v-list-tile-content class="align-end">{{ value }}</v-list-tile-content>
+              </v-list-tile>
+            </div>
 
-          <v-card-text style="height: 100px; position: relative">
-            <v-btn
-              absolute
-              dark
-              fab
-              top
-              right
-              color="pink"
-            >
-              <v-icon>add</v-icon>
-            </v-btn>
-          </v-card-text>
+          </v-list>
         </v-card>
       </v-flex>
     </v-layout>
@@ -43,40 +29,15 @@
 <script>
   import db from '@/components/firebaseInit'
   export default {
-    name: "Dashboard",
+    name: "dashboard",
     data () {
       return {
-        employees: []
+        sensorData: { }
       }
     },
     created () {
-      // db.collection('employees').get().then(querySnapshot => {
-      // // db.collection('employees').orderBy('dept').get().then(querySnapshot => {
-      //   querySnapshot.forEach(doc => {
-      //     console.log(doc.data());
-      //     console.log(doc.id);
-      //     const data = {
-      //       'id': doc.id,
-      //       'employee_id': doc.data().employee_id,
-      //       'name': doc.data().name,
-      //       'dept': doc.data().dept,
-      //       'position': doc.data().position,
-      //     };
-      //     this.employees.push(data)
-      //   })
-      // })
-
-      db.ref('/sensors').set({
-        sensor1: '1',
-        sensor2: '2',
-        sensor3: '3',
-        sensor4: '4',
-        sensor5: '5',
-
-      })
-
-      db.ref.('/sensors/').on('value', snapshot => {
-
+      db.ref('sensors/sensor1').on('value', snapshot => {
+        this.sensorData = snapshot.val();
       })
     }
   }

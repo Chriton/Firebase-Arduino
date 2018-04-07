@@ -1,11 +1,11 @@
 # Arduino Project
 
-This is an Arduino project that saves and updates data to a Firebase Realtime Database
+This is an Arduino project that writes and updates data to a Firebase Realtime Database.
 
 ## Arduino IDE Setup
 
 - Install [Arduino IDE](https://www.arduino.cc/en/Main/Software)
-- Add the ArduinoJson library to Arduino IDE (Sketch -> Include library -> Manage Libraries -> search and install ArduinoJson)
+- Add the [ArduinoJson](https://github.com/bblanchon/ArduinoJson) library to Arduino IDE (Sketch -> Include library -> Manage Libraries -> search and install ArduinoJson)
 - Add the [firebase-arduino](https://github.com/firebase/firebase-arduino) demo files to Arduino IDE (download 
 the zip repository to a folder of your choice and then Sketch -> Include library -> Manage Libraries -> Add .ZIP Library)
 - Add support for [Wemos D1 mini v.2.30](https://wiki.wemos.cc/products:retired:d1_mini_v2.3.0) -> Arduino IDE -> Tools -> Board -> 
@@ -66,3 +66,10 @@ eg.
 #define FIREBASE_HOST "wemosd1-1.firebaseio.com"
 ```
 
+## Programming the Wemos D1 mini
+
+Open the sketch.ino with Arduino IDE and set your own data in:
+- FIREBASE_AUTH
+- FIREBASE_HOST
+- WIFI_SSID
+- WIFI_PASSWORD

@@ -24,11 +24,18 @@
       </v-toolbar-title>
       <v-spacer></v-spacer>
       <v-toolbar-items class="hidden-xs-only">
+
+        <v-btn v-if="isLoggedIn" flat router v-on:click="logout">
+          <v-icon left>exit_to_app</v-icon>
+          Logout
+        </v-btn>
+
         <v-btn
           flat v-for="item in menuItems"
           :key="item.title"
           router
-          :to="item.link">
+          :to="item.link"
+          v-on:click.native="item.action">
           <v-icon left>{{ item.icon }}</v-icon>
           {{ item.title }}
         </v-btn>
@@ -38,21 +45,44 @@
 </template>
 
 <script>
+  import firebase from 'firebase'
+
   export default {
+    name: "navbar",
     data() {
       return {
+        isLoggedIn: false,
+        currentUser: false,
         sideNav: false,
         menuItems: [
-          {icon: 'supervisor_account', title: 'View something', link: ''},
-          {icon: 'room', title: 'Organise Meetup', link: ''},
-          {icon: 'person', title: 'Profile', link: '/profile'},
-          {icon: 'face', title: 'Sign up', link: '/signup'},
-          {icon: 'lock_open', title: 'Sign in', link: '/signin'},
+          { icon: 'face', title: 'Login', link: '/login', action: this.noAction },
+          { icon: 'lock_open', title: 'Register', link: '/register', action: this.noAction },
+          { icon: 'exit_to_app', title: 'Logout', link: '', action: this.logout },
         ]
 
       }
     },
-    name: "Navbar",
+    created() {
+      if (firebase.auth().currentUser) {
+        this.isLoggedIn = true;
+        this.currentUser = firebase.auth().currentUser.email;
+      }
+    },
+    methods: {
+      logout: function () {
+        firebase
+          .auth()
+          .signOut()
+          .then(
+            () => {
+              // this.$router.push('/login');
+              this.$router.go({ path: this.$router.path });
+            });
+      },
+      noAction: function () {
+        //do nothing
+      }
+    }
   }
 </script>
 

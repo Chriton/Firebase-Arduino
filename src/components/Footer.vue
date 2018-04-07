@@ -1,7 +1,8 @@
 <template>
-  <!--<v-footer :fixed="fixed" app>-->
-  <!--<span>&copy; 2018</span>-->
-  <!--</v-footer>-->
+  <v-footer class="pa-3" app>
+    <v-spacer></v-spacer>
+    <div>&copy; {{ new Date().getFullYear() }}</div>
+  </v-footer>
 </template>
 
 <script>

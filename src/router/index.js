@@ -1,52 +1,77 @@
 import Vue from 'vue'
 import Router from 'vue-router'
 import Dashboard from '@/components/Dashboard'
-import Profile from '@/components/User/Profile'
-import Signin from '@/components/User/Signin'
-import Signup from '@/components/User/Signup'
-import NewEmployee from '@/components/User/NewEmployee'
-import EditEmployee from '@/components/User/EditEmployee'
-import ViewEmployee from '@/components/User/ViewEmployee'
+import Login from '@/components/User/Login'
+import Register from '@/components/User/Register'
+import firebase from 'firebase'
 
-Vue.use(Router)
+Vue.use(Router);
 
-export default new Router({
+let router = new Router({
   routes: [
     {
       path: '/',
-      name: 'Dashboard',
-      component: Dashboard
+      name: 'dashboard',
+      component: Dashboard,
+      meta: {
+        requiresAuth: true
+      }
     },
     {
-      path: '/profile',
-      name: 'Profile',
-      component: Profile
+      path: '/login',
+      name: 'login',
+      component: Login,
+      meta: {
+        requiresGuest: true
+      }
     },
     {
-      path: '/signin',
-      name: 'Signin',
-      component: Signin
-    },
-    {
-      path: '/signup',
-      name: 'Signup',
-      component: Signup
-    },
-    {
-      path: '/new',
-      name: 'new-employee',
-      component: NewEmployee
-    },
-    {
-      path: '/edit/:employee_id',
-      name: 'edit-employee',
-      component: EditEmployee
-    },
-    {
-      path: '/view/:employee_id',
-      name: 'view-employee',
-      component: ViewEmployee
+      path: '/register',
+      name: 'register',
+      component: Register,
+      meta: {
+        requiresGuest: true
+      }
     }
   ],
   mode: 'history'
-})
+});
+
+//Nav Guards
+router.beforeEach((to, from, next) => {
+  //Check for required auth guard
+  if (to.matched.some(record => record.meta.requiresAuth)) {
+      //Check if NOT logged in
+      if(!firebase.auth().currentUser) {
+        //Go to login page
+        next({
+          path: '/login',
+          query: {
+            redirect: to.fullPath
+          }
+        });
+      } else {
+        //proceed to route
+        next();
+      }
+  } else if (to.matched.some(record => record.meta.requiresGuest)) {
+      //Check if logged in
+      if(firebase.auth().currentUser) {
+        //Go to login page
+        next({
+          path: '/',
+          query: {
+            redirect: to.fullPath
+          }
+        });
+      } else {
+        //proceed to route
+        next();
+      }
+  } else {
+      //proceed to route
+      next();
+  }
+});
+
+export default router;
