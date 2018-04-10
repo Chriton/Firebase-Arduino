@@ -1,6 +1,6 @@
-# firebase-arduino
+# Firebase Arduino
 
-> A Vue.js project
+> A Vue.js project which reads data from Firebase Realtime Database. The data is written to Firebase by a Wemos D1 mini arduino.
 
 ## Build Setup
 
@@ -18,4 +18,6 @@ npm run build
 npm run build --report
 ```
 
-For a detailed explanation on how things work, check out the [guide](http://vuejs-templates.github.io/webpack/) and [docs for vue-loader](http://vuejs.github.io/vue-loader).
+## Arduino setup
+
+- the Arduino Project folder contains the instructions for setting up and programming the Wemos D1 mini

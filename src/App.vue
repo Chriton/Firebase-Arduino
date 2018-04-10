@@ -36,10 +36,13 @@
     <main>
       <router-view></router-view>
     </main>
+    <Footer/>
   </v-app>
 </template>
 
 <script>
+  import Footer from '@/components/Footer'
+
   export default {
     data() {
       return {
@@ -52,6 +55,9 @@
         ]
       }
     },
-    name: 'App'
+    name: 'App',
+    components: {
+      Footer
+    }
   }
 </script>
