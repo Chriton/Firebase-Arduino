@@ -8,8 +8,8 @@ export const store = new Vuex.Store({
   state: {
     user: null,
     loading: false,
-    error: null
-
+    error: null,
+    sensorData: {}
   },
   mutations: {
     setUser (state, payload) {
@@ -23,6 +23,9 @@ export const store = new Vuex.Store({
     },
     clearError (state) {
       state.error = null
+    },
+    setSensorData (state, payload) {
+      state.sensorData = payload
     }
    },
   actions: {
@@ -68,6 +71,13 @@ export const store = new Vuex.Store({
     },
     clearError ({commit}) {
       commit('clearError')
+    },
+    loadSensorData ({commit}) {
+      commit('setLoading', true);
+      firebase.database().ref('sensors/sensor1').on('value', snapshot => {
+        commit('setSensorData', snapshot.val());
+        commit('setLoading', false);
+      })
     }
   },
   getters: {
@@ -79,6 +89,9 @@ export const store = new Vuex.Store({
     },
     error (state) {
     return state.error
+    },
+    sensorData (state) {
+      return state.sensorData
     }
   }
 });

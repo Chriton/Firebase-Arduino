@@ -1,8 +1,19 @@
 <template>
   <v-container>
-    <v-layout row wrap>
+    <v-layout row wrap v-if="loading">
+      <v-flex xs12 sm10 md8 offset-sm1 offset-md2 class="text-xs-center">
+        <v-progress-circular
+          indeterminate
+          color="primary"
+          :width="7"
+          :size="70">
+        </v-progress-circular>
+      </v-flex>
+      </v-layout>
+    <v-layout  v-if="!loading">
       <v-flex xs12 sm10 md8 offset-sm1 offset-md2>
-          <v-card class="mb-2">
+        <!--TODO - what if the object is empty?-->
+          <v-card class="mb-2" v-for="(value, propertyName, index) in sensorData" v-bind:key="sensorData.index">
           <v-container fluid>
             <v-layout row>
               <v-flex xs5 sm4 md3>
@@ -14,8 +25,8 @@
               <v-flex xs7 sm8 md9>
                 <v-card-title primary-title>
                   <div>
-                    <h5 class="headline mb-0 info--text" >Sensor 1 data</h5>
-                    <div>some random subtitle...</div>
+                    <h5 class="headline mb-0 info--text" >Value: {{ value }} </h5>
+                    <div>{{ index + 1 }}.{{ propertyName }}</div>
                   </div>
                 </v-card-title>
                 <v-card-actions>
@@ -36,7 +47,14 @@
 <script>
   export default {
     name: "sensor",
-    computed: {}
+    computed: {
+      sensorData() {
+        return this.$store.getters.sensorData
+      },
+      loading () {
+        return this.$store.getters.loading
+      }
+    }
   }
 </script>
 

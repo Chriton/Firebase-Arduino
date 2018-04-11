@@ -35,6 +35,7 @@ new Vue({
       projectId: "fir-arduino-1",
       storageBucket: "fir-arduino-1.appspot.com",
       messagingSenderId: "1007645832525"
-    })
+    });
+    this.$store.dispatch('loadSensorData')
   }
 });
