@@ -8,8 +8,8 @@
 
 
 //Firebase Realtime Database setup
-#define FIREBASE_HOST "your database link"
-#define FIREBASE_AUTH "your database secret"
+#define FIREBASE_HOST "fir-arduino-1.firebaseio.com"
+#define FIREBASE_AUTH "JRt6JlnyJA2PemMGOG4IT3W6Sb3B51Mh0ZKvEFIF"
 
 //WI-FI setup
 #define WIFI_SSID "your ssid"
@@ -21,7 +21,7 @@ Adafruit_NeoPixel pixels = Adafruit_NeoPixel(1, PIN, NEO_GRB + NEO_KHZ800);
 
 //Other variables
 int n = 0;
-String sensorData = "sensors/sensor1/measurement";
+String sensorData = "sensors/sensor1/Sensor Data ";
 
 void setup() {
   Serial.begin(9600);
@@ -34,11 +34,29 @@ void setup() {
   Serial.print("connecting");
   while (WiFi.status() != WL_CONNECTED) {
     Serial.print(".");
+
+    //flash yellow when waiting to connect
+    pixels.setPixelColor(0, pixels.Color(255,255,0));
+    pixels.show();
+    delay(50);
+    pixels.setPixelColor(0, pixels.Color(0,0,0));
+    pixels.show();
+
+
     delay(500);
   }
   Serial.println();
   Serial.print("connected: ");
   Serial.println(WiFi.localIP());
+
+  //flash orange when connected
+  pixels.setPixelColor(0, pixels.Color(255,128,0));
+  pixels.show();
+  delay(50);
+  pixels.setPixelColor(0, pixels.Color(0,0,0));
+  pixels.show();
+
+
 
   Firebase.begin(FIREBASE_HOST, FIREBASE_AUTH);
 }

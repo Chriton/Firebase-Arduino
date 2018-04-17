@@ -13,11 +13,7 @@
 
 <script>
   export default {
-    name: "home",
-    data () {
-      return {}
-    },
-    methods: {}
+    name: "home"
   }
 </script>
 

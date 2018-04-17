@@ -5,6 +5,7 @@ import Signup from '@/components/User/Signup'
 import Signin from '@/components/User/Signin'
 import Profile from '@/components/User/Profile'
 import Sensor from '@/components/Arduino/Sensor'
+import AuthGuard from './auth-guard'
 
 
 Vue.use(Router)
@@ -19,7 +20,8 @@ export default new Router({
     {
       path: '/profile',
       name: 'Profile',
-      component: Profile
+      component: Profile,
+      beforeEnter: AuthGuard,
     },
     {
       path: '/signup',
@@ -34,7 +36,8 @@ export default new Router({
     {
       path: '/sensor',
       name: 'Sensor',
-      component: Sensor
+      component: Sensor,
+      beforeEnter: AuthGuard
     }
   ],
   mode: 'history'

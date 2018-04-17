@@ -1,6 +1,7 @@
 import Vue from 'vue'
 import Vuex from 'vuex'
 import * as firebase from 'firebase'
+import router from '@/router'
 
 Vue.use(Vuex);
 
@@ -56,7 +57,7 @@ export const store = new Vuex.Store({
           .then(
             user => {
               commit('setLoading', false);
-              const newUser = {
+              const newUser =  {
                 id: user.uid
               };
               commit('setUser', newUser);
@@ -72,8 +73,22 @@ export const store = new Vuex.Store({
     clearError ({commit}) {
       commit('clearError')
     },
+    autoSignIn ({commit}, payload) {
+      commit('setUser', { id: payload.uid })
+    },
+    logout ({commit}) {
+      firebase.auth().signOut()
+        .then( () => {
+          commit('setUser', null);
+          router.push('/')
+        })
+        .catch(
+          error => {
+          //TODO
+        })
+    },
     loadSensorData ({commit}) {
-      commit('setLoading', true);
+      //commit('setLoading', true);
       firebase.database().ref('sensors/sensor1').on('value', snapshot => {
         commit('setSensorData', snapshot.val());
         commit('setLoading', false);

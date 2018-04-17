@@ -34,8 +34,16 @@ new Vue({
       databaseURL: "https://fir-arduino-1.firebaseio.com",
       projectId: "fir-arduino-1",
       storageBucket: "fir-arduino-1.appspot.com",
-      messagingSenderId: "1007645832525"
+      //messagingSenderId: "1007645832525"
     });
+
+    firebase.auth().onAuthStateChanged((user) => {
+      //if (user && user.emailVerified()) {
+      if (user) {
+        this.$store.dispatch('autoSignIn', user)
+      }
+    });
+
     this.$store.dispatch('loadSensorData')
   }
 });
