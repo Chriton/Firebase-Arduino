@@ -63,6 +63,7 @@
     name: "sensor",
     computed: {
       sensorData() {
+        this.$store.dispatch('loadSensorData')
         return this.$store.getters.sensorData
       },
       loading () {

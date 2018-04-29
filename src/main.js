@@ -44,6 +44,6 @@ new Vue({
       }
     });
 
-    this.$store.dispatch('loadSensorData')
+    //this.$store.dispatch('loadSensorData')
   }
 });

@@ -88,7 +88,7 @@ export const store = new Vuex.Store({
         })
     },
     loadSensorData ({commit}) {
-      //commit('setLoading', true);
+      commit('setLoading', true);
       firebase.database().ref('sensors/sensor1').on('value', snapshot => {
         commit('setSensorData', snapshot.val());
         commit('setLoading', false);
