@@ -9,12 +9,12 @@
 
 
 //Firebase Realtime Database setup
-#define FIREBASE_HOST "example.firebaseio.com"
-#define FIREBASE_AUTH "token_or_secret"
+#define FIREBASE_HOST "fir-arduino-1.firebaseio.com"
+#define FIREBASE_AUTH "JRt6JlnyJA2PemMGOG4IT3W6Sb3B51Mh0ZKvEFIF"
 
 //WI-FI setup
-#define WIFI_SSID "SSID"
-#define WIFI_PASSWORD "PASSWORD"
+#define WIFI_SSID "netcentricair"
+#define WIFI_PASSWORD "ZurichMunichBarcelona"
 
 //WS2812B RGB shield setup
 #define PIN D2
