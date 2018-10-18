@@ -5,7 +5,8 @@ This is an Arduino project that writes and updates data to a Firebase Realtime D
 ## Arduino IDE Setup
 
 - Install [Arduino IDE](https://www.arduino.cc/en/Main/Software)
-- Add the [ArduinoJson](https://github.com/bblanchon/ArduinoJson) library to Arduino IDE (Sketch -> Include library -> Manage Libraries -> search and install ArduinoJson)
+- Add the [ArduinoJson](https://github.com/bblanchon/ArduinoJson) library to Arduino IDE (Sketch -> Include library -> Manage Libraries -> search and install ArduinoJson).
+Note that there might me some issues with the latest version (I've downgraded to 5.13.2)
 - Add the [firebase-arduino](https://github.com/firebase/firebase-arduino) demo files to Arduino IDE (download 
 the zip repository to a folder of your choice and then Sketch -> Include library -> Manage Libraries -> Add .ZIP Library)
 - Add support for [Wemos D1 mini v.2.30](https://wiki.wemos.cc/products:retired:d1_mini_v2.3.0) -> Arduino IDE -> Tools -> Board -> 
@@ -73,3 +74,26 @@ Open the sketch.ino with Arduino IDE and set your own data in:
 - FIREBASE_HOST
 - WIFI_SSID
 - WIFI_PASSWORD
+
+## Troubleshooting 
+
+- When running the program on your Arduino if the data cannot be read/written to Firebase, double check the 4 const: 
+- FIREBASE_AUTH
+- FIREBASE_HOST
+- WIFI_SSID
+- WIFI_PASSWORD
+
+### [ArduinoJson](https://github.com/bblanchon/ArduinoJson)
+- Note that there might me some issues with the latest version of [ArduinoJson](https://github.com/bblanchon/ArduinoJson) (I've downgraded to 5.13.2). 
+To downgrade, go to Sketch -> Include library -> Manage Libraries -> search for [ArduinoJson](https://github.com/bblanchon/ArduinoJson) 
+-> click Select version -> 5.13.2 -> restart Arduino IDE.
+
+### [firebase-arduino](https://github.com/firebase/firebase-arduino) 
+At this moment (v0.1) [firebase-arduino](https://github.com/firebase/firebase-arduino) seems not to work anymore, so if you get an error in the Arduino log like "setting /number failed" (and you cannot read/write to firebase) try this:
+[firebase-arduino change fingerprint 1](https://github.com/FirebaseExtended/firebase-arduino/issues/373#issuecomment-411006219) or [firebase-arduino change fingerprint 2](https://github.com/FirebaseExtended/firebase-arduino/issues/369#issuecomment-410087936). So basically:
+ - first check the new Firebase fingerprint here [Server Fingerprints](https://www.grc.com/fingerprints.htm). Do not just copy the fingerprint from the earlier links, maybe it has changed again, so just verify it and put the one shown on [Server Fingerprints](https://www.grc.com/fingerprints.htm).
+ - then replace the old fingerprint found in your [firebase-arduino](https://github.com/firebase/firebase-arduino) zip file -> FirebaseHttpClient.h
+ - reimport the [firebase-arduino](https://github.com/firebase/firebase-arduino) library and recompile your sketch.
+
+
+

@@ -2,18 +2,19 @@
 //https://github.com/wemos/D1_mini_Examples
 //https://github.com/firebase/firebase-arduino/tree/master/examples
 
+#include <ArduinoJson.h>
 #include <Adafruit_NeoPixel.h>
 #include <ESP8266WiFi.h>
 #include <FirebaseArduino.h>
 
 
 //Firebase Realtime Database setup
-#define FIREBASE_HOST "fir-arduino-1.firebaseio.com"
-#define FIREBASE_AUTH "JRt6JlnyJA2PemMGOG4IT3W6Sb3B51Mh0ZKvEFIF"
+#define FIREBASE_HOST "example.firebaseio.com"
+#define FIREBASE_AUTH "token_or_secret"
 
 //WI-FI setup
-#define WIFI_SSID "your ssid"
-#define WIFI_PASSWORD "your wifi password"
+#define WIFI_SSID "SSID"
+#define WIFI_PASSWORD "PASSWORD"
 
 //WS2812B RGB shield setup
 #define PIN D2
@@ -34,29 +35,11 @@ void setup() {
   Serial.print("connecting");
   while (WiFi.status() != WL_CONNECTED) {
     Serial.print(".");
-
-    //flash yellow when waiting to connect
-    pixels.setPixelColor(0, pixels.Color(255,255,0));
-    pixels.show();
-    delay(50);
-    pixels.setPixelColor(0, pixels.Color(0,0,0));
-    pixels.show();
-
-
     delay(500);
   }
   Serial.println();
   Serial.print("connected: ");
   Serial.println(WiFi.localIP());
-
-  //flash orange when connected
-  pixels.setPixelColor(0, pixels.Color(255,128,0));
-  pixels.show();
-  delay(50);
-  pixels.setPixelColor(0, pixels.Color(0,0,0));
-  pixels.show();
-
-
 
   Firebase.begin(FIREBASE_HOST, FIREBASE_AUTH);
 }
@@ -71,7 +54,7 @@ void loop() {
 
     // handle error
     if (Firebase.failed()) {
-      Serial.print("Failed to update data to sensors/sensor1/measurement"+ i);
+      Serial.print("Failed to update data to " + sensorData + i);
       Serial.println(Firebase.error());
 
       //Flash red pixel on the RGB shield
@@ -94,70 +77,4 @@ void loop() {
   }
 
   delay(5000);
-
-
-// Other Examples
-//  // set value
-//  Firebase.setFloat("number", 42.0);
-//  // handle error
-//  if (Firebase.failed()) {
-//      Serial.print("setting /number failed:");
-//      Serial.println(Firebase.error());
-//      return;
-//  }
-//  delay(1000);
-//
-//
-//  // update value
-//  Firebase.setFloat("number", 43.0);
-//  // handle error
-//  if (Firebase.failed()) {
-//      Serial.print("setting /number failed:");
-//      Serial.println(Firebase.error());
-//      return;
-//  }
-//  delay(1000);
-//
-//
-//  // get value
-//  Serial.print("number: ");
-//  Serial.println(Firebase.getFloat("number"));
-//  delay(1000);
-//
-//
-//  // remove value
-//  Firebase.remove("number");
-//  delay(1000);
-//
-//
-//  // set string value
-//  Firebase.setString("message", "hello world");
-//  // handle error
-//  if (Firebase.failed()) {
-//      Serial.print("setting /message failed:");
-//      Serial.println(Firebase.error());
-//      return;
-//  }
-//  delay(1000);
-//
-//
-//  // set bool value
-//  Firebase.setBool("truth", false);
-//  // handle error
-//  if (Firebase.failed()) {
-//      Serial.print("setting /truth failed:");
-//      Serial.println(Firebase.error());
-//      return;
-//  }
-//  delay(1000);
-//
-//
-//  // append a new value to /logs
-//  String name = Firebase.pushInt("logs", n++);
-//  // handle error
-//  if (Firebase.failed()) {
-//      Serial.print("pushing /logs failed:");
-//      Serial.println(Firebase.error());
-//      return;
-//  }
 }
