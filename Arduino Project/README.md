@@ -37,7 +37,7 @@ Board Manager -> search and install ESP8266.
 Also make sure you set these in Arduino IDE -> Tools:
 - Board: Wemos D1 R2 & mini
 - Flash Size: 4M (3M SPIFFS)
-- Upload Speed: 921600
+- Upload Speed: 115200 (you can try a faster speed if it works)
 - Port: /dev/cu.wchusbserial1410 (Note that the right port will appear only when the device is connected to USB. Download the driver from [here](https://wiki.wemos.cc/downloads))
 - Programmer ArduinoISP
 
