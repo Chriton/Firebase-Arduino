@@ -1,6 +1,6 @@
 // Doru Muntean march 2018
-//https://github.com/wemos/D1_mini_Examples
-//https://github.com/firebase/firebase-arduino/tree/master/examples
+// https://github.com/wemos/D1_mini_Examples
+// https://github.com/firebase/firebase-arduino/tree/master/examples
 
 #include <ArduinoJson.h>
 #include <Adafruit_NeoPixel.h>
@@ -8,15 +8,15 @@
 #include <FirebaseArduino.h>
 
 
-//Firebase Realtime Database setup
-#define FIREBASE_HOST "fir-arduino-1.firebaseio.com"
-#define FIREBASE_AUTH "JRt6JlnyJA2PemMGOG4IT3W6Sb3B51Mh0ZKvEFIF"
+// Firebase Realtime Database setup
+#define FIREBASE_HOST "YOUR_HOST"
+#define FIREBASE_AUTH "YOUR_AUTH"
 
-//WI-FI setup
-#define WIFI_SSID "netcentricair"
-#define WIFI_PASSWORD "ZurichMunichBarcelona"
+// WI-FI setup
+#define WIFI_SSID "YOUR_SSID"
+#define WIFI_PASSWORD "YOUR_PASSWORD"
 
-//WS2812B RGB shield setup
+// WS2812B RGB shield setup
 #define PIN D2
 Adafruit_NeoPixel pixels = Adafruit_NeoPixel(1, PIN, NEO_GRB + NEO_KHZ800);
 
@@ -30,7 +30,7 @@ void setup() {
   //Initialize the NeoPixel library for the WS2812B RGB shield
   pixels.begin();
 
-  //Connect to WI-FI.
+  // Connect to WI-FI.
   WiFi.begin(WIFI_SSID, WIFI_PASSWORD);
   Serial.print("connecting");
   while (WiFi.status() != WL_CONNECTED) {
@@ -52,12 +52,12 @@ void loop() {
     Serial.println(sensorData+i);
     Firebase.setInt(sensorData+i, n++);
 
-    // handle error
+    // Handle error
     if (Firebase.failed()) {
       Serial.print("Failed to update data to " + sensorData + i);
       Serial.println(Firebase.error());
 
-      //Flash red pixel on the RGB shield
+      // Flash red pixel on the RGB shield
       pixels.setPixelColor(0, pixels.Color(255,0,0));
       pixels.show();
       delay(50);
@@ -67,7 +67,7 @@ void loop() {
       return;
 
     } else {
-      //Flash green pixel on the RGB shield
+      // Flash green pixel on the RGB shield
       pixels.setPixelColor(0, pixels.Color(0,255,0));
       pixels.show();
       delay(50);
