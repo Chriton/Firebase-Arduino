@@ -93,7 +93,7 @@ At this moment (v0.1) [firebase-arduino](https://github.com/firebase/firebase-ar
 [firebase-arduino change fingerprint 1](https://github.com/FirebaseExtended/firebase-arduino/issues/373#issuecomment-411006219) or [firebase-arduino change fingerprint 2](https://github.com/FirebaseExtended/firebase-arduino/issues/369#issuecomment-410087936). So basically:
  - first check the new Firebase fingerprint here [Server Fingerprints](https://www.grc.com/fingerprints.htm). Copy your database address in there (eg. mydatabase.firebaseio.com) and click on Fingerprint Site. For me at this moment it shows: 6F:D0:9A:52:C0:E9:E4:CD:A0:D3:02:A4:B7:A1:92:38:2D:CA:2F:26
  - Do not just copy this one, maybe it has changed again, so just verify it yourself.
- - remove the [firebase-arduino](https://github.com/firebase/firebase-arduino) library (added initially). For mac OS the location is /Users/your_user/Documents/Arduino/libraries and there will be a folder like firebase-arduino in there so just delete the folder.
+ - remove the [firebase-arduino](https://github.com/firebase/firebase-arduino) library (added initially). For mac OS the location is ~/Documents/Arduino/libraries and there will be a folder like firebase-arduino in there so just delete the folder.
  - extract the files downloaded from the [firebase-arduino](https://github.com/firebase/firebase-arduino) repository/releases zip in a folder of your choice and replace the old fingerprint which can be found in the extracted files -> src/FirebaseHttpClient.h -> kFirebaseFingerprint
 - after you add the new fingerprint, put the files back into a zip file and reimport the library like shown in the Arduino IDE Setup section.
 - restart Arduino IDE and recompile your sketch.
