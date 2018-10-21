@@ -89,7 +89,7 @@ To downgrade, go to Sketch -> Include library -> Manage Libraries -> search for 
 -> click Select version -> 5.13.2 -> restart Arduino IDE.
 
 ### [firebase-arduino](https://github.com/firebase/firebase-arduino) 
-At this moment (v0.1) [firebase-arduino](https://github.com/firebase/firebase-arduino) seems not to work anymore, so if you get an error in the Arduino log like "setting /number failed" (and you cannot read/write to firebase) try this:
+At this moment (I'm using v0.3) [firebase-arduino](https://github.com/firebase/firebase-arduino) seems not to work anymore, so if you get an error in the Arduino log like "setting /number failed" (and you cannot read/write to firebase) try this:
 [firebase-arduino change fingerprint 1](https://github.com/FirebaseExtended/firebase-arduino/issues/373#issuecomment-411006219) or [firebase-arduino change fingerprint 2](https://github.com/FirebaseExtended/firebase-arduino/issues/369#issuecomment-410087936). So basically:
  - first check the new Firebase fingerprint here [Server Fingerprints](https://www.grc.com/fingerprints.htm). Copy your database address in there (eg. mydatabase.firebaseio.com) and click on Fingerprint Site. For me at this moment it shows: 6F:D0:9A:52:C0:E9:E4:CD:A0:D3:02:A4:B7:A1:92:38:2D:CA:2F:26
  - Do not just copy this one, maybe it has changed again, so just verify it yourself.
