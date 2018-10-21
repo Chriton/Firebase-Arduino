@@ -9,6 +9,8 @@ This is an Arduino project that writes and updates data to a Firebase Realtime D
 - either by downloading the zip file from the github repository/releases and then in Arduino IDE go to Sketch -> Include library -> Manage Libraries -> Add .ZIP Library
 - or in Arduino IDE go to Sketch -> Include library -> Manage Libraries -> search for the library name -> Install
 
+More info [here](https://www.arduino.cc/en/Guide/Libraries).
+
 Add the following libraries:
 
 - [ArduinoJson](https://github.com/bblanchon/ArduinoJson). Note that there might be some issues with the latest version (I've downgraded to 5.13.2)
@@ -18,7 +20,10 @@ Add the following libraries:
 
 ## Removing an arduino library 
 
-- To remove a library you need delete the library's folder and then restart Arduino IDE. On mac OS the libraries are located in ~/Documents/Arduino/libraries.
+- To remove a library you need delete the library's folder and then restart Arduino IDE. On mac OS the default location of the libraries is ~/Documents/Arduino/libraries.
+
+Note that you can always change the location of the libraries by going to Arduino IDE -> Preferences -> Settings -> Sketchbook location -> and set your own location. 
+In there a "library" folder will be created and used by Arduino IDE.
 
 ## Arduino Hardware
 
